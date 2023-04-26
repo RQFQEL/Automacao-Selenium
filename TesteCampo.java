@@ -1,3 +1,5 @@
+import static org.junit.Assert.assertEquals;
+
 import java.util.List;
 
 import org.junit.Assert;
@@ -130,7 +132,7 @@ public class TesteCampo {
 	}
 	
 	@Test
-	public void interagirComAlerts() {
+	public void interagirComAlertSimples() {
 		WebDriver driver = new ChromeDriver();
 		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
 		driver.findElement(By.id("alert")).click();
@@ -171,7 +173,24 @@ public class TesteCampo {
 		Assert.assertEquals(":D", prompt.getText());
 		prompt.accept();
 		
-		driver.quit();
+		//driver.quit();
 	}
 	
+	@Test
+	public void buscarTextosNaPagina() {
+		WebDriver driver = new ChromeDriver();
+		driver.get("file:///" + System.getProperty("user.dir") + "/src/main/resources/componentes.html");
+		
+		//ira buscar por meio de tags e no site existe muitas tag (metodo com pouca perfomance)
+		//Assert.assertEquals("Campo de Treinamento", driver.findElement(By.tagName("h3")).getText());
+		
+		//ira buscar dentro da tag body um campo que contem o texto a ser validado
+		//Assert.assertTrue(driver.findElement(By.tagName("body")).getText().contains("Campo de Treinamento"));
+		
+		Assert.assertEquals("Cuidado onde clica, muitas armadilhas...", driver.findElement(By.className("facilAchar")).getText());
+		
+		driver.quit();
+		
+		
+	}
 }
